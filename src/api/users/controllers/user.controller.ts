@@ -13,21 +13,6 @@ export class UserController {
 
   @Post()
   async create(@Body() newUserData: User) {
-    const {
-      activeUser,
-      firstName,
-      idUserType,
-      lastName,
-      loginUser,
-      userPassword,
-    } = newUserData;
-    return await this.userService.create(
-      loginUser,
-      firstName,
-      lastName,
-      userPassword,
-      idUserType,
-      activeUser,
-    );
+    return await this.userService.create(newUserData);
   }
 }

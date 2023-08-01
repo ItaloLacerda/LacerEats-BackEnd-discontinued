@@ -1,26 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { UserModel } from 'src/database/models/users/user.service';
+import { User } from 'src/types/user/user.interface';
 
 @Injectable()
 export class UserService {
   constructor(private readonly userModel: UserModel) {}
 
-  async create(
-    loginUser: string,
-    firstName: string,
-    lastName: string,
-    userPassword: string,
-    idUserType: number,
-    activeUser: boolean,
-  ) {
-    await this.userModel.create(
-      loginUser,
-      firstName,
-      lastName,
-      userPassword,
-      idUserType,
-      activeUser,
-    );
+  async create(newUserData: User) {
+    await this.userModel.create(newUserData);
 
     return await this.findAll();
   }
