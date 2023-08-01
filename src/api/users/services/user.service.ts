@@ -15,4 +15,16 @@ export class UserService {
   async findAll() {
     return await this.userModel.findAll();
   }
+
+  async findId(idUsers: string) {
+    return await this.userModel.findId(idUsers);
+  }
+
+  async update(idUsers: string, user: User) {
+    return await this.userModel.update(idUsers, user);
+  }
+
+  async delete(idUsers: string) {
+    return await this.userModel.delete(idUsers);
+  }
 }
