@@ -11,25 +11,25 @@ datasource db {
 }
 
 model UserType {
-  id_user_type  Int      @id @default(autoincrement())
+  idUserType    Int       @id @default(autoincrement()) @map("id_user_type")
   type          String
-  creation_date DateTime @default(now())
-  active_type   Boolean
+  creationDate  DateTime  @default(now()) @map("creation_date")
+  activeType    Boolean   @map("active_type")
   user          User[]
 
   @@map("types_of_users")
 }
 
 model User {
-  id_users      Int      @id @default(autoincrement())
-  first_name    String
-  last_name     String
-  login_user    String
-  user_password String
-  active_user   Boolean
-  user_type     UserType @relation(fields: [id_user_type], references: [id_user_type])
-  id_user_type  Int
-  creation_date DateTime @default(now())
+  idUsers      String    @id @default(uuid()) @map("id_users")
+  firstName    String    @map("first_name")
+  lastName     String    @map("last_name")
+  loginUser    String    @map("login_user")
+  userPassword String    @map("user_password")
+  activeUser   Boolean   @map("active_user")
+  userType     UserType  @relation(fields: [idUserType], references: [idUserType])
+  idUserType   Int       @map("id_user_type")
+  creationDate DateTime  @default(now()) @map("creation_date")
 
   @@map("users")
 }
