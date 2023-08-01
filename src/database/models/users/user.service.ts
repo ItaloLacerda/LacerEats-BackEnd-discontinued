@@ -1,26 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/database/prisma.service';
+import { User } from 'src/types/user/user.interface';
 
 @Injectable()
 export class UserModel {
-  constructor(private readonly prismaServicee: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
-  async create(
-    loginUser: string,
-    firstName: string,
-    lastName: string,
-    userPassword: string,
-    idUserType: number,
-    activeUser: boolean,
-  ) {
-    const newUser = await this.prismaServicee.user.create({
+  async create(user: User) {
+    const newUser = await this.prismaService.user.create({
       data: {
-        login_user: loginUser,
-        first_name: firstName,
-        last_name: lastName,
-        user_password: userPassword,
-        id_user_type: idUserType,
-        active_user: activeUser,
+        ...user,
       },
     });
 
@@ -28,6 +17,33 @@ export class UserModel {
   }
 
   async findAll() {
-    return await this.prismaServicee.user.findMany();
+    return await this.prismaService.user.findMany();
+  }
+
+  async findId(idUsers: string) {
+    return await this.prismaService.user.findFirst({
+      where: {
+        idUsers,
+      },
+    });
+  }
+
+  async update(idUsers: string, user: User) {
+    return await this.prismaService.user.update({
+      where: {
+        idUsers,
+      },
+      data: {
+        ...user,
+      },
+    });
+  }
+
+  async delete(idUsers: string) {
+    return await this.prismaService.user.delete({
+      where: {
+        idUsers,
+      },
+    });
   }
 }
