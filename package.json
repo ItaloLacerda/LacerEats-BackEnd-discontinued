@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-    "vercel-build": "prisma migrate diff --from-url '$DATABASE_URL' --to-migrations ./migrations --script > script.sql",
+    "vercel-build": "prisma migrate diff",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
