@@ -28,6 +28,5 @@ COPY --from=builder --chown=node:node /home/node/prisma/ ./prisma/
 COPY --from=builder --chown=node:node /home/node/dist/ ./dist/
 
 RUN npm ci
-RUN npx prisma db push
 
 CMD ["npm", "start"]
