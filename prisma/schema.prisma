@@ -8,6 +8,7 @@ generator client {
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model UserType {
@@ -32,4 +33,5 @@ model User {
   creationDate DateTime  @default(now()) @map("creation_date")
 
   @@map("users")
+  @@index([idUserType])
 }
