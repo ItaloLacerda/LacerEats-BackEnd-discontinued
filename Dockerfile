@@ -9,6 +9,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY --chown=node:node . .
+RUN npx prisma db push
 RUN npm run build \
     && npm prune --production
 
@@ -25,7 +26,5 @@ COPY --from=builder --chown=node:node /home/node/package*.json ./
 COPY --from=builder --chown=node:node /home/node/node_modules/ ./node_modules/
 COPY --from=builder --chown=node:node /home/node/prisma/ ./prisma/
 COPY --from=builder --chown=node:node /home/node/dist/ ./dist/
-
-RUN npx prisma db push
 
 CMD ["node", "dist/main"]
