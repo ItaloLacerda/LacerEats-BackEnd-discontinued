@@ -7,6 +7,7 @@ async function bootstrap() {
   const { exposePort } = config;
 
   const app = NestFactory.create<NestExpressApplication>(AppModule);
+  (await app).enableCors();
   (await app).listen(exposePort);
 }
 bootstrap();
