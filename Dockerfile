@@ -11,7 +11,7 @@ RUN npm ci
 COPY --chown=node:node . .
 RUN npm run build \
     && npm prune --production
-RUN npx prisma migrate deploy
+RUN prisma migrate deploy
 
 # ---
 
