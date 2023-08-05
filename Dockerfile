@@ -9,7 +9,7 @@ COPY package*.json ./
 RUN npm ci
 
 COPY --chown=node:node . .
-RUN npx prisma db push
+RUN npx prisma migrate deploy
 RUN npm run build \
     && npm prune --production
 
